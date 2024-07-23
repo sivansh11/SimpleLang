@@ -1,0 +1,3 @@
+[submodule "deps/8bit-computer/8bit-computer"]
+	path = deps/8bit-computer/8bit-computer
+	url = https://github.com/lightcode/8bit-computer.git
