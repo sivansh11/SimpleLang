@@ -33,7 +33,7 @@ enum class token_type_t : uint32_t {
 
 struct token_t {
     token_type_t type;
-    std::string text;  // TODO(optimise): make this a string view to save space
+    std::string text;  
 };
 
 struct lexer_t {
@@ -174,8 +174,7 @@ public:
                 }
                 continue;
             }
-            token.type = token_type_t::e_undefined;
-            return token;
+            throw std::runtime_error(std::string("unexpected char ") + *c);
         }
         return { {token_type_t::e_end} };
     }

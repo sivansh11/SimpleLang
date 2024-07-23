@@ -12,28 +12,38 @@ namespace sl {
 
 class interpreter_t {
 public:
-    interpreter_t(const ast_t& ast, const std::vector<std::string>& identifier_table) : _ast(ast), _identifier_table(identifier_table) {}
-
-    void run() {
+    interpreter_t(const ast_t& ast, const std::vector<std::string>& identifier_table) : _ast(ast), _identifier_table(identifier_table) {
         for (int32_t i = _ast.statements.size() - 1; i >= 0; i--) {
             statement_t *statement = _ast.statements[i];
             stack.push(statement);
         }
+    }
 
-        while (stack.size()) {
-            statement_t *statement = stack.top(); stack.pop();
-            switch (statement->type) {
-                case statement_type_t::e_declaration:
-                    run_declaration(statement->as.declaration);
-                    break;
-                case statement_type_t::e_expression:
-                    run_expression(statement->as.expression);
-                    break;
-                case statement_type_t::e_if:
-                    run_if(statement->as._if);
-                    break;
-            }
+    bool can_run() {
+        return stack.size();
+    }
+
+    void run_statement() {
+        statement_t *statement = stack.top(); stack.pop();
+        switch (statement->type) {
+            case statement_type_t::e_declaration:
+                run_declaration(statement->as.declaration);
+                break;
+            case statement_type_t::e_expression:
+                run_expression(statement->as.expression);
+                break;
+            case statement_type_t::e_if:
+                run_if(statement->as._if);
+                break;
         }
+    }
+
+    std::string get_state() {
+        std::stringstream s;
+        for (auto [var, val] : _variables) {
+            s << "var: " << var << " = " << uint32_t(val) << '\n';
+        }
+        return s.str();
     }
 
 private:

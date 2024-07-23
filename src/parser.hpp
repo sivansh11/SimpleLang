@@ -169,10 +169,6 @@ private:
         }
 
         return Err("unexpected error"s);
-
-        // } else {
-        //     return Err("complex declaration not implemented"s);
-        // }
     }
 
     Result<std::pair<uint32_t, expression_t *>, std::string> parse_expression() {
@@ -250,7 +246,7 @@ private:
             }
 
             // + - == 
-            return Err("not recognised operator"s);
+            return Err("unexpected token, should either be ; or a subexpression followed by ;"s);
         }
 
         return Err("expcted ; or an operator"s);

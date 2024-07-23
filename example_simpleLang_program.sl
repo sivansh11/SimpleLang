@@ -1,15 +1,21 @@
-// Variable declaration 
-int a = 6;
-int b; 
-int c; 
+// Variable declaration
+int a;
+int b;
+int c;
 
-// Assignment 
-a = a + 10;   // not in the language spec, but added
-b = 20; 
-c = a + b; 
+// Assignment
+a = 7;
+b = 20;
+c = a + b + 5;
 
-// Conditional 
-if (c == 30) { 
- a = b + 5; 
- c = a + 100;
-} 
+int d;
+d = a + b;
+
+// Conditional
+if (c == 32) {
+    a = 100 - 9;
+}
+
+if (a == 91) {
+    b = 6;
+}
