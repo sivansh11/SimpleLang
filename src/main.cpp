@@ -12,11 +12,12 @@ std::ostream& operator<<(std::ostream& o, const sl::token_t& token) {
 }
 
 int main(int argc, char **argv) {
-    if (argc < 2 || argc > 2) {
-        std::cout << "./simpleLang {path to .sl src}\n"; 
-        exit(EXIT_FAILURE);
-    }
-    std::string src = sl::read_file(argv[1]);
+    // if (argc < 2 || argc > 2) {
+    //     std::cout << "./simpleLang {path to .sl src}\n"; 
+    //     exit(EXIT_FAILURE);
+    // }
+    // std::string src = sl::read_file(argv[1]);
+    std::string src = sl::read_file("../example.sl");
 
     sl::lexer_t lexer{ src };
     std::vector<sl::token_t> tokens = lexer.tokens();

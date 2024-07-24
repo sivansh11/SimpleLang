@@ -37,7 +37,18 @@ private:
         if (declaration->type == declaration_type_t::e_simple) {
             variable_offset[declaration->as.simple.identifier->id] = variable_offset.size();
         } else {
-            throw std::runtime_error("complex declaration not implemented");
+            // throw std::runtime_error("complex declaration not implemented");
+            expression_t left_expression{};
+            left_expression.type = expression_type_t::e_unary;
+            left_expression.as.unary.type = unary_type_t::e_identifier;
+            left_expression.as.unary.as.identifier = declaration->as.complex.identifier;
+            token_t assign_op = token_t{ .type = token_type_t::e_assign };
+            expression_t expression{};
+            expression.type = expression_type_t::e_binary;
+            expression.as.binary.left_expression = &left_expression;
+            expression.as.binary.op = &assign_op;
+            expression.as.binary.right_expression = declaration->as.complex.expression;
+            gen_expression(&expression);
         }
     }
 

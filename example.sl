@@ -1,10 +1,10 @@
 // Variable declaration
-int a;
+int a = 6;
 int b;
 int c;
 
 // Assignment
-a = 7;
+a = a + 7;
 b = 20;
 c = a + b + 5;
 
@@ -12,7 +12,7 @@ int d;
 d = a + b;
 
 // Conditional
-if (c == 32) {
+if (c == 38) {
     a = 100 - 9;
 }
 
